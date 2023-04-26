@@ -19,14 +19,21 @@ arr은 배열입니다.
 
 function unique(arr) {
     /* your code */
-    arr.sort();
-    for(let i = 0; i < arr.length; i++)
-        arr.splice(i, arr.lastIndexOf(arr[i]) - i);
-    return arr;
+    return arr.reduce((myarr,item,index) => {
+        if(myarr == 0) {
+            myarr = [];
+            myarr.push(item);
+            return myarr;
+        }
+        let temp = myarr.find(temp => temp == item);
+        if( temp == undefined )
+            myarr.push(item);
+        return myarr;
+    }, 0);
 }
 
 let strings = ["Hare", "Krishna", "Hare", "Krishna",
     "Krishna", "Krishna", "Hare", "Hare", ":-O"
 ];
-unique(strings);
-alert( unique(strings) ); // Hare, Krishna, :-O
+console.log(unique(strings));
+//alert( unique(strings) ); // Hare, Krishna, :-O
