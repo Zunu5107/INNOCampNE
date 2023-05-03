@@ -50,3 +50,17 @@ public class DigitalClock extends JFrame implements Runnable{
         }
     }
 }
+
+/*
+
+
+     *
+    ***
+   *****
+  *******
+ *********
+  *******
+   *****
+    ***
+     *
+ */
