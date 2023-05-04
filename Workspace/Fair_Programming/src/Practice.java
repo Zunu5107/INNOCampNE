@@ -108,7 +108,35 @@ public class Practice {
         System.out.println(answer);
     }
 
+    public int solutionR(int n) {
+        return (Math.sqrt(n) % 1 % 7 != 0) ? (n / 7) + 1 : (n / 7);
+    }
 
+    public String solutionW(String my_string) {
+        return my_string.replaceAll("[a|e|i|o|u]","");
+    }
+
+    public int solutionQ(int price) {
+        if(price > 100000)
+            if(price > 300000)
+                return (int) (price * 0.05 * ((price < 500000) ? 2 : 4));
+            else
+                return (int) (price * 0.05);
+        return price;
+    }
+
+    public int solutionX(String str1, String str2) {
+        return (str1.contains(str2) ? 1 : 2);
+    }
+    public static boolean seetion(int[] a){
+        System.out.println(a.toString());
+        return true;
+    }
+    public int solution(int[] array, int n) {
+        //int[] ans = Arrays.asList(array).stream().toList().;
+        //System.out.println(Arrays.toString());
+        return 1;
+    }
     /*
     https://school.programmers.co.kr/learn/courses/30/lessons/12935
     문제 설명
@@ -124,7 +152,7 @@ public class Practice {
         [5,1,3,8]	    [5,3,8]
         [10]	        [-1]
     */
-    public int[] solution(int[] arr)
+    public int[] solutionQ(int[] arr)
     {
         int[] answer = {};
         if(arr.length == 1){
@@ -165,13 +193,17 @@ public class Practice {
     public static void main(String[] arg){
 
         Scanner sc = new Scanner(System.in);
+        Practice pr = new Practice();
 
+        int[] str = {1, 1, 2, 3, 4, 5};
+        int str2 = 1;
+        System.out.println(pr.solution(str,str2));
 
-
+    /*
         Q9(sc);
         Q9_2(sc);
         Q9_3(sc);
-
+    */
 
         return;
     }
