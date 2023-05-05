@@ -533,6 +533,63 @@ public class AlivePr {
             answer += Character.getNumericValue(c);
         return answer;
     }
+    /* 순서쌍의 개수
+        문제 설명
+            순서쌍이란 두 개의 숫자를 순서를 정하여 짝지어 나타낸 쌍으로 (a, b)로 표기합니다.
+            자연수 n이 매개변수로 주어질 때 두 숫자의 곱이 n인 자연수 순서쌍의 개수를 return하도록 solution 함수를 완성해주세요.
+
+        제한사항
+            1 ≤ n ≤ 1,000,000
+        입출력 예
+            n	    result
+            20	    6
+            100	    9
+        입출력 예 설명
+            입출력 예 #1
+                n이 20 이므로 곱이 20인 순서쌍은 (1, 20), (2, 10), (4, 5), (5, 4), (10, 2), (20, 1) 이므로 6을 return합니다.
+            입출력 예 #2
+                n이 100 이므로 곱이 100인 순서쌍은 (1, 100), (2, 50), (4, 25), (5, 20), (10, 10), (20, 5), (25, 4), (50, 2), (100, 1) 이므로 9를 return합니다.
+     */
+    public int solutionAM(int n) {
+        int answer = 1;
+        int[] x = new int[(int)Math.sqrt(n) + 1];
+        for(int i = 2; i <= Math.sqrt(n); i++) {    // 또는 i * i <= N
+            while(n % i == 0) {
+                if(x[i - 1] == 0)
+                    x[i - 1] += 2;
+                else
+                    x[i - 1]++;
+                n /= i;
+            }
+        }
+        if (n != 1) {
+            if(x[n - 1] == 0)
+                x[n - 1] += 2;
+            else
+                x[n - 1]++;
+        }
+        for(int c : x)
+            answer *= (c!=0) ? c : 1;
+        return answer;
+    }
+    public int solutionAM2(int n) {
+        int answer = 0;
+        for(int i = 1; i <= Math.sqrt(n); i++){ // sqrt로 확인할 약수 줄이기 (Math.sqrt(n)이 n의 약수중 가장 중간값,
+//            if (n % i == 0){ // 약수 중 작은 수 확인
+//                answer++;
+//                if (n / i != i){ // 약수 중 큰 수 확인 (두수가 같을 경우 더해주지 않는다)
+//                    answer++;
+//                }
+//            }
+            if (n % i == 0) { // 약수 중 작은 수 확인 보통의 경우 작은수와 큰수의 쌍으로 약수가 나오니 두 쌍을 만들수 있음 +2
+                answer += 2;
+                if (i == Math.sqrt(n)) { // n의 제곱근인 경우 약수쌍이 같은값 (n,n)
+                    answer--;
+                }
+            }
+        }
+        return answer;
+    }
 
     /* 자릿수 더하기
         문제 설명
@@ -585,6 +642,7 @@ public class AlivePr {
                 answer += Character.getNumericValue(c); // char -> int
         return answer;
     }
+
     /* 문자열 정렬하기 (1)
         문제 설명
             문자열 my_string이 매개변수로 주어질 때, my_string 안에 있는 숫자만 골라 오름차순 정렬한 리스트를 return 하도록 solution 함수를 작성해보세요.
@@ -606,9 +664,8 @@ public class AlivePr {
             입출력 예 #3
                 "abcde0"에 있는 숫자 0을 오름차순 정렬한 [0]을 return 합니다.
      */
-    public int[] solution(String my_string) {
-        int answer[] = {};
-        return answer;
+    public int[] solutionAP(String my_string) {
+        return Arrays.stream(my_string.replaceAll("[^0-9]", "").split("")).sorted().mapToInt(Integer::parseInt).toArray();
     }
 
 
@@ -637,27 +694,30 @@ public class AlivePr {
 
 
 
+
     public static void main(String[] arg){
+
         Scanner sc = new Scanner(System.in);
         AlivePr pr = new AlivePr();
 
-        /*
         int num1 = sc.nextInt();
         //int num2 = sc.nextInt();
+        //String LineS = sc.nextLine();
         //int[] numarr = {num1, num2};
 
-        System.out.println(pr.solution(num1));
+        long nanos = System.nanoTime();
+
+        System.out.println(pr.solutionAM2(num1));
         //System.out.println(pr.solution(num1, num2));
         //System.out.println(pr.solution(numarr));
         //System.out.println(Arrays.toString(pr.solution(num1)));
-        */
 
-        String LineS = sc.nextLine();
         //String[] K = LineS.replaceAll("[^0-9|,]", "").split(",");
         //int[] numarr = new int[K.length];
         //for(int i = 0; i < K.length;i++)
         //    numarr[i] = Integer.parseInt(K[i]);
         //System.out.println(Arrays.toString(numarr));
-        System.out.println(pr.solution(LineS));
+        //System.out.println(pr.solution(LineS));
+        System.out.println("소요시간 : " + String.format("%.2f",(System.nanoTime() - nanos)/1000000.0) + "ms");
     }
 }
