@@ -507,13 +507,109 @@ public class AlivePr {
                     입출력 예 #2
                         my_string이 "bread"이므로 거꾸로 뒤집은 "daerb"를 return합니다.
     */
-    public String solution(String my_string) {
+    public String solutionS(String my_string) {
         String answer = "";
         return answer;
     }
-    //[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    // "[^0-9|,]", ""
 
+    /* 자릿수 더하기
+        문제 설명
+            정수 n이 매개변수로 주어질 때 n의 각 자리 숫자의 합을 return하도록 solution 함수를 완성해주세요
+        제한사항
+            0 ≤ n ≤ 1,000,000
+        입출력 예
+            n	        result
+            1234	    10
+            930211	    16
+        입출력 예 설명
+            입출력 예 #1
+                1 + 2 + 3 + 4 = 10을 return합니다.
+            입출력 예 #2
+                9 + 3 + 0 + 2 + 1 + 1 = 16을 return합니다.
+     */
+    public int solutionAL(int n) {
+        int answer = 0;
+        for(char c : String.valueOf(n).toCharArray())
+            answer += Character.getNumericValue(c);
+        return answer;
+    }
+
+    /* 자릿수 더하기
+        문제 설명
+            개미 군단이 사냥을 나가려고 합니다. 개미군단은 사냥감의 체력에 딱 맞는 병력을 데리고 나가려고 합니다.
+            장군개미는 5의 공격력을, 병정개미는 3의 공격력을 일개미는 1의 공격력을 가지고 있습니다.
+            예를 들어 체력 23의 여치를 사냥하려고 할 때, 일개미 23마리를 데리고 가도 되지만,
+            장군개미 네 마리와 병정개미 한 마리를 데리고 간다면 더 적은 병력으로 사냥할 수 있습니다.
+            사냥감의 체력 hp가 매개변수로 주어질 때,
+            사냥감의 체력에 딱 맞게 최소한의 병력을 구성하려면 몇 마리의 개미가 필요한지를 return하도록 solution 함수를 완성해주세요.
+        제한사항
+            hp는 자연수입니다.
+            0 ≤ hp ≤ 1000
+        입출력 예
+            hp	    result
+            23	    5
+            24	    6
+            999	    201
+        입출력 예 설명
+            입출력 예 #1
+                hp가 23이므로, 장군개미 네마리와 병정개미 한마리로 사냥할 수 있습니다. 따라서 5를 return합니다.
+            입출력 예 #2
+                hp가 24이므로, 장군개미 네마리 병정개미 한마리 일개미 한마리로 사냥할 수 있습니다. 따라서 6을 return합니다.
+            입출력 예 #3
+                hp가 999이므로, 장군개미 199 마리 병정개미 한마리 일개미 한마리로 사냥할 수 있습니다. 따라서 201을 return합니다.
+     */
+    public int solutionAN(int hp) {
+        return hp / 5 + (hp % 5) / 3 + (hp % 5 % 3);
+    }
+
+    /* 숨어있는 숫자의 덧셈 (1)
+        문제 설명
+            문자열 my_string이 매개변수로 주어집니다. my_string안의 모든 자연수들의 합을 return하도록 solution 함수를 완성해주세요.
+        제한사항
+            1 ≤ my_string의 길이 ≤ 1,000
+            my_string은 소문자, 대문자 그리고 한자리 자연수로만 구성되어있습니다.
+        입출력 예
+            my_string	        result
+            "aAb1B2cC34oOp"	    10
+            "1a2b3c4d123"	    16
+        입출력 예 설명
+            입출력 예 #1
+                "aAb1B2cC34oOp"안의 한자리 자연수는 1, 2, 3, 4 입니다. 따라서 1 + 2 + 3 + 4 = 10 을 return합니다.
+            입출력 예 #2
+                "1a2b3c4d123Z"안의 한자리 자연수는 1, 2, 3, 4, 1, 2, 3 입니다. 따라서 1 + 2 + 3 + 4 + 1 + 2 + 3 = 16 을 return합니다.
+     */
+    public int solutionAO(String my_string) {
+        int answer = 0;
+        for(char c : my_string.toCharArray()) // String[i] -> char
+            if('0' <= c && c <= '9') // 문자가 숫자 (0 - 9) 인지 판별
+                answer += Character.getNumericValue(c); // char -> int
+        return answer;
+    }
+    /* 문자열 정렬하기 (1)
+        문제 설명
+            문자열 my_string이 매개변수로 주어질 때, my_string 안에 있는 숫자만 골라 오름차순 정렬한 리스트를 return 하도록 solution 함수를 작성해보세요.
+
+        제한사항
+            1 ≤ my_string의 길이 ≤ 100
+            my_string에는 숫자가 한 개 이상 포함되어 있습니다.
+            my_string은 영어 소문자 또는 0부터 9까지의 숫자로 이루어져 있습니다. - - -
+        입출력 예
+            my_string	    result
+            "hi12392"	    [1, 2, 2, 3, 9]
+            "p2o4i8gj2"	    [2, 2, 4, 8]
+            "abcde0"	    [0]
+        입출력 예 설명
+            입출력 예 #1
+                "hi12392"에 있는 숫자 1, 2, 3, 9, 2를 오름차순 정렬한 [1, 2, 2, 3, 9]를 return 합니다.
+            입출력 예 #2
+                "p2o4i8gj2"에 있는 숫자 2, 4, 8, 2를 오름차순 정렬한 [2, 2, 4, 8]을 return 합니다.
+            입출력 예 #3
+                "abcde0"에 있는 숫자 0을 오름차순 정렬한 [0]을 return 합니다.
+     */
+    public int[] solution(String my_string) {
+        int answer[] = {};
+        return answer;
+    }
 
 
 
@@ -557,10 +653,11 @@ public class AlivePr {
         */
 
         String LineS = sc.nextLine();
-        String[] K = LineS.replaceAll("[^0-9|,]", "").split(",");
-        int[] numarr = new int[K.length];
-        for(int i = 0; i < K.length;i++)
-            numarr[i] = Integer.parseInt(K[i]);
-        System.out.println(Arrays.toString(numarr));
+        //String[] K = LineS.replaceAll("[^0-9|,]", "").split(",");
+        //int[] numarr = new int[K.length];
+        //for(int i = 0; i < K.length;i++)
+        //    numarr[i] = Integer.parseInt(K[i]);
+        //System.out.println(Arrays.toString(numarr));
+        System.out.println(pr.solution(LineS));
     }
 }
